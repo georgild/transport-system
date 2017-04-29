@@ -168,6 +168,10 @@
       <Project>{DF2DD221-66E6-4FC7-9A60-31BD2E8C9CC4}</Project>
       <Name>Authorization</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DataLayer\DataLayer.csproj">
+      <Project>{3ee6cbbf-6d2d-416e-ae23-d5ff3ec37ac5}</Project>
+      <Name>DataLayer</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Models\Models.csproj">
       <Project>{43c42797-f94c-43f8-aa7a-6057d8061b79}</Project>
       <Name>Models</Name>

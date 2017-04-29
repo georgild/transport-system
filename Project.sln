@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Authorization", "Authorizat
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Models", "Models\Models.csproj", "{43C42797-F94C-43F8-AA7A-6057D8061B79}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataLayer", "DataLayer\DataLayer.csproj", "{3EE6CBBF-6D2D-416E-AE23-D5FF3EC37AC5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{43C42797-F94C-43F8-AA7A-6057D8061B79}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{43C42797-F94C-43F8-AA7A-6057D8061B79}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{43C42797-F94C-43F8-AA7A-6057D8061B79}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3EE6CBBF-6D2D-416E-AE23-D5FF3EC37AC5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3EE6CBBF-6D2D-416E-AE23-D5FF3EC37AC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3EE6CBBF-6D2D-416E-AE23-D5FF3EC37AC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3EE6CBBF-6D2D-416E-AE23-D5FF3EC37AC5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -40,5 +46,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{DF2DD221-66E6-4FC7-9A60-31BD2E8C9CC4} = {B54CA3A3-7944-4ED3-B965-65ED60BED0F0}
 		{43C42797-F94C-43F8-AA7A-6057D8061B79} = {543DA753-4A20-40BA-AD7D-FBBE4B711439}
+		{3EE6CBBF-6D2D-416E-AE23-D5FF3EC37AC5} = {EF703872-2A3D-4791-9DEB-F0490AAED019}
 	EndGlobalSection
 EndGlobal
