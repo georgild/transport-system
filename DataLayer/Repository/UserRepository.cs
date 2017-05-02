@@ -16,8 +16,20 @@ namespace DataLayer.Repository {
             _session.Connect();
         }
 
-        public User GetUser(string name) {
-            return null;
+        public void Delete(string Id) {
+            _session.Delete<User>(us => us.Id == Id);
+        }
+
+        public List<User> Find() {
+            return _session.Find<User>(us => true);
+        }
+
+        public void InsertOne(User user) {
+            _session.InsertOne(user);
+        }
+
+        public void ReplaceOne(string Id, User user) {
+            _session.ReplaceOne(us => us.Id == Id, user);
         }
     }
 }

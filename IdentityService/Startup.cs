@@ -8,7 +8,7 @@ using System.Web;
 using System.Web.Http;
 using IdentityService.Providers;
 
-[assembly: OwinStartup(typeof(IdentityService.Startup))]
+//[assembly: OwinStartup(typeof(IdentityService.Startup))]
 namespace IdentityService {
     public class Startup {
         public void Configuration(IAppBuilder app) {

@@ -53,6 +53,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\BusRoutesRepository.cs" />
+    <Compile Include="Repository\BusCompanyRepository.cs" />
     <Compile Include="Repository\UserRepository.cs" />
     <Compile Include="Session\MongoSession.cs" />
   </ItemGroup>
