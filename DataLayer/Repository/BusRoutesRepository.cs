@@ -1,4 +1,5 @@
 ﻿using DataLayer.Session;
+using DataLayer.Utilities;
 using Models;
 using System;
 using System.Collections.Generic;
@@ -53,8 +54,7 @@ namespace DataLayer.Repository {
                     result = filter;
                 }
                 else {
-                    var body = Expression.AndAlso(result.Body, filter.Body);
-                    result = Expression.Lambda<Func<BusRoute, bool>>(body, result.Parameters[0]);
+                    result = ExpressionHelpers.CombineWithAnd(result, filter);
                 }
             }
             //Expression.AndAlso

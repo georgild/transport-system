@@ -57,6 +57,7 @@
     <Compile Include="Repository\BusCompanyRepository.cs" />
     <Compile Include="Repository\UserRepository.cs" />
     <Compile Include="Session\MongoSession.cs" />
+    <Compile Include="Utilities\ExpressionHelpers.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
