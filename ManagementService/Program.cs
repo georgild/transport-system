@@ -17,7 +17,7 @@ namespace ManagementService {
 
                 //var response = client.GetAsync(baseAddress + "api/values").Result;
 
-                Console.WriteLine("Server started.");
+                Console.WriteLine("Server started on port 9001");
                 //Console.WriteLine(response.Content.ReadAsStringAsync().Result);
                 Console.ReadLine();
             }

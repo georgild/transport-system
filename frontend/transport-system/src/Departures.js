@@ -4,7 +4,7 @@ import {PropTypes} from 'prop-types';
 
 import ReactDataGrid from 'react-data-grid';
 
-class Arrivals extends React.Component {
+class Departures extends React.Component {
 
     constructor(props) {
         super(props);
@@ -17,11 +17,11 @@ class Arrivals extends React.Component {
     }
 
     columns = [{ 
-        key: 'ArrivesAt', 
-        name: 'Arrives At' 
+        key: 'DepartsAt', 
+        name: 'Departs At' 
     }, { 
-        key: 'ArrivesFrom', 
-        name: 'Arrives From' 
+        key: 'TravelsTo', 
+        name: 'Travels To' 
     }, { 
         key: 'CompanyName', 
         name: 'Company Name' 
@@ -52,18 +52,15 @@ class Arrivals extends React.Component {
 
     render() {
         return (
-            <div>
-                <label for="edit-flight">Полет: </label>
-                <input name="flight" id="edit-flight" type="text" maxlength="64" value=""/>
-                <ReactDataGrid
-                    columns={this.columns}
-                    rowGetter={rowNumber => this.state.data[rowNumber]}
-                    rowsCount={this.state.data.length}
-                    minHeight={500}
-                />
-            </div>
+            <ReactDataGrid
+                columns={this.columns}
+                rowGetter={rowNumber => this.state.data[rowNumber]}
+                rowsCount={this.state.data.length}
+                minHeight={500}
+            />
+
         );
     }
 }
 
-export default Arrivals;
+export default Departures;

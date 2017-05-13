@@ -22,9 +22,13 @@ namespace ManagementService.Controllers {
 
         [Route("")]
         [HttpGet]
-        public List<BusRoute> Get([FromUri]string filters) {
-            List<RequestFilter> parseFilters = JsonConvert.DeserializeObject<List<RequestFilter>>(filters);
-            return _repository.Find(parseFilters);
+        public List<BusRoute> Get([FromUri]string filters = null) {
+
+            List<RequestFilter> parsedFilters = new List<RequestFilter>();
+            if (!string.IsNullOrWhiteSpace(filters)) {
+                parsedFilters = JsonConvert.DeserializeObject<List<RequestFilter>>(filters);
+            }
+            return _repository.Find(parsedFilters);
         }
 
         [Route("")]

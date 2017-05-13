@@ -1,5 +1,6 @@
 import React from 'react';
 import Arrivals from './Arrivals';
+import Departures from './Departures';
 
 class Main extends React.Component {
 
@@ -10,20 +11,25 @@ class Main extends React.Component {
 
     render() {
         return (
-            <table>
-            <thead>
-              <tr>
-                  <th>Arrivals</th>
-                  <th>Departures</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                  <td><Arrivals/></td>
-                  <td><Arrivals/></td>
-              </tr>
-            </tbody>
-            </table>
+            <Arrivals url="http://localhost:9001/api/v1/routes" pollInterval={50000}/>
+            /*<table>
+                <thead>
+                  <tr>
+                      <th>Arrivals</th>
+                      <th>Departures</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                         <td>
+                            <Arrivals url="http://localhost:9001/api/v1/routes" pollInterval={50000}/>
+                        </td>
+                        <td>
+                            <Departures url="http://localhost:9001/api/v1/routes" pollInterval={50000}/>
+                        </td>
+                  </tr>
+                </tbody>
+            </table>*/
         );
     }
 }

@@ -71,7 +71,14 @@ namespace DataLayer.Repository {
         }
 
         public List<BusRoute> Find(List<RequestFilter> filters) {
-            return _session.Find(ParseFilters(filters));
+
+            Expression<Func<BusRoute, bool>> filter = (r => true);
+
+            if (filters.Count > 0) {
+                filter = ParseFilters(filters);
+            }
+
+            return _session.Find(filter);
         }
 
         public void InsertOne(BusRoute route) {
