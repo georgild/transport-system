@@ -44,7 +44,7 @@ namespace DataLayer.Repository {
                         filter = (route => route.CompanyName.Contains(requestFilter.Value));
                         break;
                     case "Type":
-                        //filter = (route => route.Type == requestFilter.Value);
+                        filter = (route => route.Type == (RouteType)Enum.Parse(typeof(RouteType), requestFilter.Value));
                         break;
                     case "TicketPrice":
                         //filter = (route => route.Type == requestFilter.Value);

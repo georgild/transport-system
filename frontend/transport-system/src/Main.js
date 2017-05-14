@@ -11,7 +11,7 @@ class Main extends React.Component {
 
     render() {
         return (
-            <Arrivals url="http://localhost:9001/api/v1/routes" pollInterval={50000}/>
+            <Arrivals url="http://localhost:9001/api/v1/routes" pollInterval={50000} initialFilters={[{Property: 'Type', Value: 1, Operator: 'eq'}]}/>
             /*<table>
                 <thead>
                   <tr>
