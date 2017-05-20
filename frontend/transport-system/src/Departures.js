@@ -3,6 +3,7 @@ import $ from 'jquery';
 import {PropTypes} from 'prop-types';
 
 import ReactDataGrid from 'react-data-grid';
+import FilterForm from './FilterForm';
 
 class Departures extends React.Component {
 
@@ -30,10 +31,11 @@ class Departures extends React.Component {
         name: 'Ticket Price' 
     }]
 
-    loadArrivals() {
+    loadArrivals(filters) {
 
         $.ajax({
             url: this.props.url,
+            data: 'filters=' + JSON.stringify(this.props.initialFilters.concat(filters)),
             dataType: 'json',
             cache: false,
             success: function (data) {
@@ -45,19 +47,26 @@ class Departures extends React.Component {
         });
     }
 
-    componentDidMount() {
-        this.loadArrivals();
+    handleFiltersSubmit = (filters) => {
+        this.loadArrivals(filters);
+    }
+
+    componentDidMount = () => {
+        this.loadArrivals([]);
         //setInterval(this.loadArrivals, this.props.pollInterval);
     }
 
     render() {
         return (
-            <ReactDataGrid
-                columns={this.columns}
-                rowGetter={rowNumber => this.state.data[rowNumber]}
-                rowsCount={this.state.data.length}
-                minHeight={500}
-            />
+            <div>
+                <FilterForm onFilterSubmit={this.handleFiltersSubmit}/>
+                <ReactDataGrid
+                    columns={this.columns}
+                    rowGetter={rowNumber => this.state.data[rowNumber]}
+                    rowsCount={this.state.data.length}
+                    minHeight={500}
+                />
+            </div>
 
         );
     }

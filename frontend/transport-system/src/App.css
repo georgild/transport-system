@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  font-size: 0.92em;
 }
 
 .App-logo {
@@ -23,6 +24,66 @@
   to { transform: rotate(360deg); }
 }
 
-table {
-  width: 100%;
+.App-data-container {
+  margin: 0 100px 0 100px;
+}
+
+/*table {
+  width: 70%;
+}*/
+
+form.filterForm {
+  margin: 10px;
+}
+
+form.filterForm label {
+  font-weight: 700;
+}
+
+input {
+  margin: 10px;
+  border-radius: 4px;
+}
+
+input.button {
+  background-color: #333;
+  border: none;
+  color: white;
+  padding: 14px 16px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  cursor: pointer;
+}
+
+ul.nav-bar {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
+
+ul.nav-bar li {
+  display: inline-block;
+}
+
+ul.nav-bar li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+ul.nav-bar li a.active {
+  background-color: #111;
+}
+
+ul.nav-bar li a:hover {
+  background-color: #111;
+}
+
+.react-grid-Row.react-grid-Row--odd .react-grid-Cell {
+  background-color: #eee;
 }

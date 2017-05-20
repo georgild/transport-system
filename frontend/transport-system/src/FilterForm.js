@@ -63,28 +63,32 @@ let FilterForm = React.createClass({
 
     render : function() {
         return (
-
-            <form className="commentForm" onSubmit={this.handleSubmit}>
-                <input
-                    type="text"
-                    placeholder="ArrivesAt"
-                    value={this.state.ArrivesAt}
-                    onChange={this.handleArrivesAtChange}
-                />
-                <input
-                    type="text"
-                    placeholder="ArrivesFrom"
-                    value={this.state.ArrivesFrom}
-                    onChange={this.handleArrivesFromChange}
-                />
-                <input
-                    type="text"
-                    placeholder="CompanyName"
-                    value={this.state.CompanyName}
-                    onChange={this.handleCompanyNameChange}
-                />
-                <input type="submit" /*disabled={!this.state.ArrivesAt && !this.state.ArrivesFrom && !this.state.CompanyName}*/ value="Search" />
-            </form>
+            <div>
+                <form className="filterForm" onSubmit={this.handleSubmit}>
+                    <label htmlFor="ArrivesAt">Arrives at:</label>
+                    <input
+                        id="ArrivesAt"
+                        type="text"
+                        value={this.state.ArrivesAt}
+                        onChange={this.handleArrivesAtChange}
+                    />
+                    <label htmlFor="ArrivesFrom">Arrives from:</label>
+                    <input
+                        id="ArrivesFrom"
+                        type="text"
+                        value={this.state.ArrivesFrom}
+                        onChange={this.handleArrivesFromChange}
+                    />
+                    <label htmlFor="CompanyName">Company name:</label>
+                    <input
+                        id="CompanyName"
+                        type="text"
+                        value={this.state.CompanyName}
+                        onChange={this.handleCompanyNameChange}
+                    />
+                    <input className="button" type="submit" /*disabled={!this.state.ArrivesAt && !this.state.ArrivesFrom && !this.state.CompanyName}*/ value="Search" />
+                </form>
+            </div>
         );
     }
 });
