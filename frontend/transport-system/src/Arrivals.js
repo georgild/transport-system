@@ -49,7 +49,7 @@ class Arrivals extends React.Component {
                 if (data) {
                     data.forEach(function(route) {
                         parsedData.push({
-                            ArrivesAt: route.FinalStop.ArrivalDate,
+                            ArrivesAt: (new Date(route.FinalStop.ArrivalDate)).toLocaleString(),
                             ArrivesFrom: route.InitialStop.City,
                             CompanyName: route.CompanyName,
                             TicketPrice: route.TicketPrice + ' $'

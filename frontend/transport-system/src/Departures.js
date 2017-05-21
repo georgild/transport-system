@@ -44,7 +44,7 @@ class Departures extends React.Component {
                 if (data) {
                     data.forEach(function(route) {
                         parsedData.push({
-                            DepartsAt: route.InitialStop.DepartureDate,
+                            DepartsAt: (new Date(route.InitialStop.DepartureDate)).toLocaleString(),
                             TravelsTo: route.FinalStop.City,
                             CompanyName: route.CompanyName,
                             TicketPrice: route.TicketPrice + ' $'

@@ -15,7 +15,7 @@ let FilterFormArrivals = React.createClass({
 
         e.preventDefault();
 
-        var ArrivesAt = this.state.ArrivesAt.trim();
+        var ArrivesAt = this.state.ArrivesAt;
         var ArrivesFrom = this.state.ArrivesFrom.trim();
         var CompanyName = this.state.CompanyName.trim();
 
@@ -24,7 +24,7 @@ let FilterFormArrivals = React.createClass({
         if (ArrivesAt) {
             filters.push({
                 Property: 'FinalStop.ArrivalDate',
-                Value: ArrivesAt, 
+                Value: (new Date(ArrivesAt)).getTime(), 
                 Operator: 'eq'
             })
         }
@@ -68,7 +68,7 @@ let FilterFormArrivals = React.createClass({
                     <label htmlFor="ArrivesAt">Arrives at:</label>
                     <input
                         id="ArrivesAt"
-                        type="text"
+                        type="date"
                         value={this.state.ArrivesAt}
                         onChange={this.handleArrivesAtChange}
                     />

@@ -15,7 +15,7 @@ let FilterFormDepartures = React.createClass({
 
         e.preventDefault();
 
-        var DepartsAt = this.state.DepartsAt.trim();
+        var DepartsAt = this.state.DepartsAt;
         var TravelsTo = this.state.TravelsTo.trim();
         var CompanyName = this.state.CompanyName.trim();
 
@@ -24,7 +24,7 @@ let FilterFormDepartures = React.createClass({
         if (DepartsAt) {
             filters.push({
                 Property: 'InitalStop.DepartureDate',
-                Value: DepartsAt, 
+                Value: (new Date(DepartsAt)).getTime(), 
                 Operator: 'eq'
             })
         }
@@ -68,7 +68,7 @@ let FilterFormDepartures = React.createClass({
                     <label htmlFor="DepartsAt">Departs at:</label>
                     <input
                         id="DepartsAt"
-                        type="text"
+                        type="date"
                         value={this.state.DepartsAt}
                         onChange={this.handleDepartsAtChange}
                     />

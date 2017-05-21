@@ -23,9 +23,28 @@ class AdminPanel extends React.Component {
             <div className="App">
                 <div className="App-header">
 
-                <h2>Transport System</h2>
+                    <h2>Transport System</h2>
                 </div>
-                
+                <div>
+                    <form onSubmit={this.handleSubmit}>
+                        <label htmlFor="CompanyName">Company Name:</label><br></br>
+                        <input
+                            id="CompanyName"
+                            type="text"
+                            value={this.state.ArrivesAt}
+                            onChange={this.handleArrivesAtChange}
+                        /><br></br>
+                        
+                        <label htmlFor="Password">Password:</label><br></br>
+                        <input
+                            id="Password"
+                            type="text"
+                            value={this.state.ArrivesFrom}
+                            onChange={this.handleArrivesFromChange}
+                        /><br></br>
+                        <input className="button" type="submit" value="Submit" />
+                    </form>
+                </div>
             </div>
         );
     }
