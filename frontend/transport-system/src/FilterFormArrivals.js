@@ -1,7 +1,7 @@
 import React from 'react';
 import {PropTypes} from 'prop-types';
 
-let FilterForm = React.createClass({
+let FilterFormArrivals = React.createClass({
 
     getInitialState : function() {
         return { ArrivesAt: '', ArrivesFrom: '', CompanyName: '' };
@@ -93,4 +93,4 @@ let FilterForm = React.createClass({
     }
 });
 
-export default FilterForm;
+export default FilterFormArrivals;

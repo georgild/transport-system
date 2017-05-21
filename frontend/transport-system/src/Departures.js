@@ -3,7 +3,7 @@ import $ from 'jquery';
 import {PropTypes} from 'prop-types';
 
 import ReactDataGrid from 'react-data-grid';
-import FilterForm from './FilterForm';
+import FilterFormDepartures from './FilterFormDepartures';
 
 class Departures extends React.Component {
 
@@ -39,7 +39,20 @@ class Departures extends React.Component {
             dataType: 'json',
             cache: false,
             success: function (data) {
-                this.setState({ data });
+                var parsedData = [];
+
+                if (data) {
+                    data.forEach(function(route) {
+                        parsedData.push({
+                            DepartsAt: route.InitialStop.DepartureDate,
+                            TravelsTo: route.FinalStop.City,
+                            CompanyName: route.CompanyName,
+                            TicketPrice: route.TicketPrice + ' $'
+                        });
+                    });
+                }
+                
+                this.setState({ data: parsedData });
             }.bind(this),
             error: function (xhr, status, err) {
                 console.error(this.props.url, status, err.toString());
@@ -59,7 +72,7 @@ class Departures extends React.Component {
     render() {
         return (
             <div>
-                <FilterForm onFilterSubmit={this.handleFiltersSubmit}/>
+                <FilterFormDepartures onFilterSubmit={this.handleFiltersSubmit}/>
                 <ReactDataGrid
                     columns={this.columns}
                     rowGetter={rowNumber => this.state.data[rowNumber]}
