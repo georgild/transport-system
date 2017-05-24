@@ -4,7 +4,7 @@ import {PropTypes} from 'prop-types';
 let FilterFormDepartures = React.createClass({
 
     getInitialState : function() {
-        return { ArrivesAt: '', ArrivesFrom: '', CompanyName: '' };
+        return { DepartsAt: '', TravelsTo: '', CompanyName: '', Currency: 'USD' };
     },
 
     propTypes : {
@@ -18,6 +18,7 @@ let FilterFormDepartures = React.createClass({
         var DepartsAt = this.state.DepartsAt;
         var TravelsTo = this.state.TravelsTo.trim();
         var CompanyName = this.state.CompanyName.trim();
+        var Currency = this.state.Currency.trim();
 
         var filters = [];
 
@@ -45,20 +46,23 @@ let FilterFormDepartures = React.createClass({
             })
         }
 
-        this.props.onFilterSubmit(filters);
+        this.props.onFilterSubmit(filters, Currency);
     },
 
     handleDepartsAtChange : function(e) {
-        this.setState({ ArrivesAt: e.target.value });
+        this.setState({ DepartsAt: e.target.value });
     },
 
     handleTravelsToChange : function(e) {
-        this.setState({ ArrivesFrom: e.target.value });
+        this.setState({ TravelsTo: e.target.value });
     },
 
     handleCompanyNameChange : function(e) {
-
         this.setState({ CompanyName: e.target.value });
+    },
+
+    handleCurrencyChange : function(e) {
+        this.setState({ Currency: e.target.value });
     },
 
     render : function() {
@@ -86,6 +90,11 @@ let FilterFormDepartures = React.createClass({
                         value={this.state.CompanyName}
                         onChange={this.handleCompanyNameChange}
                     />
+                    <label htmlFor="Currency">Ticket Currency:</label>
+                    <select id="Currency" onChange={this.handleCurrencyChange}>
+                      <option value="USD">USD</option>
+                      <option value="EUR">EUR</option>
+                    </select> 
                     <input className="button" type="submit" /*disabled={!this.state.ArrivesAt && !this.state.ArrivesFrom && !this.state.CompanyName}*/ value="Search" />
                 </form>
             </div>

@@ -27,6 +27,7 @@ class AdminPanel extends React.Component {
                 </div>
                 <div>
                     <form onSubmit={this.handleSubmit}>
+                        <br></br>
                         <label htmlFor="CompanyName">Company Name:</label><br></br>
                         <input
                             id="CompanyName"
@@ -35,9 +36,17 @@ class AdminPanel extends React.Component {
                             onChange={this.handleArrivesAtChange}
                         /><br></br>
                         
-                        <label htmlFor="Password">Password:</label><br></br>
+                        <label htmlFor="DepartsFrom">Departs from:</label><br></br>
                         <input
-                            id="Password"
+                            id="DepartsFrom"
+                            type="text"
+                            value={this.state.ArrivesFrom}
+                            onChange={this.handleArrivesFromChange}
+                        /><br></br>
+
+                        <label htmlFor="ArrivesAt">Arrives at:</label><br></br>
+                        <input
+                            id="ArrivesAt"
                             type="text"
                             value={this.state.ArrivesFrom}
                             onChange={this.handleArrivesFromChange}

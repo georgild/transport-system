@@ -4,7 +4,7 @@ import {PropTypes} from 'prop-types';
 let FilterFormArrivals = React.createClass({
 
     getInitialState : function() {
-        return { ArrivesAt: '', ArrivesFrom: '', CompanyName: '' };
+        return { ArrivesAt: '', ArrivesFrom: '', CompanyName: '', Currency: 'USD' };
     },
 
     propTypes : {
@@ -18,6 +18,7 @@ let FilterFormArrivals = React.createClass({
         var ArrivesAt = this.state.ArrivesAt;
         var ArrivesFrom = this.state.ArrivesFrom.trim();
         var CompanyName = this.state.CompanyName.trim();
+        var Currency = this.state.Currency.trim();
 
         var filters = [];
 
@@ -45,7 +46,7 @@ let FilterFormArrivals = React.createClass({
             })
         }
 
-        this.props.onFilterSubmit(filters);
+        this.props.onFilterSubmit(filters, Currency);
     },
 
     handleArrivesAtChange : function(e) {
@@ -57,8 +58,11 @@ let FilterFormArrivals = React.createClass({
     },
 
     handleCompanyNameChange : function(e) {
-
         this.setState({ CompanyName: e.target.value });
+    },
+
+    handleCurrencyChange : function(e) {
+        this.setState({ Currency: e.target.value });
     },
 
     render : function() {
@@ -86,6 +90,11 @@ let FilterFormArrivals = React.createClass({
                         value={this.state.CompanyName}
                         onChange={this.handleCompanyNameChange}
                     />
+                    <label htmlFor="Currency">Ticket Currency:</label>
+                    <select id="Currency" onChange={this.handleCurrencyChange}>
+                      <option value="USD">USD</option>
+                      <option value="EUR">EUR</option>
+                    </select> 
                     <input className="button" type="submit" /*disabled={!this.state.ArrivesAt && !this.state.ArrivesFrom && !this.state.CompanyName}*/ value="Search" />
                 </form>
             </div>

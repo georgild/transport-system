@@ -7,6 +7,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Http;
 using Newtonsoft.Json;
+using ManagementService.UtilityServices;
 
 namespace ManagementService.Controllers {
 
@@ -22,13 +23,37 @@ namespace ManagementService.Controllers {
 
         [Route("")]
         [HttpGet]
-        public List<BusRoute> Get([FromUri]string filters = null) {
+        public List<BusRoute> Get(
+            [FromUri]string filters = null,
+            [FromUri]string currency = "USD") {
 
-            List<RequestFilter> parsedFilters = new List<RequestFilter>();
-            if (!string.IsNullOrWhiteSpace(filters)) {
-                parsedFilters = JsonConvert.DeserializeObject<List<RequestFilter>>(filters);
+            List<BusRoute> result = new List<BusRoute>();
+
+            try {
+                List<RequestFilter> parsedFilters = new List<RequestFilter>();
+                if (!string.IsNullOrWhiteSpace(filters)) {
+                    parsedFilters = JsonConvert.DeserializeObject<List<RequestFilter>>(filters);
+                }
+
+                result = _repository.Find(parsedFilters);
+
+                if (currency != "USD") {
+                    try {
+                        UtilityServiceSoapClient utilityService = new UtilityServiceSoapClient();
+                        result.ForEach(delegate (BusRoute route) {
+                            route.TicketPrice = utilityService.ConvertCurrency(route.TicketPrice, "USD", currency);
+                        });
+                    }
+                    catch (Exception exc) {
+                        Console.WriteLine(exc);
+                    }
+                }
+            } catch (Exception exc) {
+                Console.WriteLine(exc);
+                throw new HttpResponseException(System.Net.HttpStatusCode.BadRequest);
             }
-            return _repository.Find(parsedFilters);
+
+            return result;
         }
 
         [Route("")]

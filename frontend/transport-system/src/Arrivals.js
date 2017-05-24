@@ -11,7 +11,8 @@ class Arrivals extends React.Component {
         super(props);
         this.state = { 
             data: [], 
-            filters : []
+            filters : [],
+            currency: 'USD'
         };
     }
 
@@ -35,11 +36,11 @@ class Arrivals extends React.Component {
         name: 'Ticket Price' 
     }]
 
-    loadArrivals(filters) {
-
+    loadArrivals(filters, currency) {
+        var self = this;
         $.ajax({
             url: this.props.url,
-            data: 'filters=' + JSON.stringify(this.props.initialFilters.concat(filters)),
+            data: 'filters=' + JSON.stringify(this.props.initialFilters.concat(filters)) + '&currency=' + currency,
             dataType: 'json',
             async: true,
             cache: false,
@@ -52,7 +53,7 @@ class Arrivals extends React.Component {
                             ArrivesAt: (new Date(route.FinalStop.ArrivalDate)).toLocaleString(),
                             ArrivesFrom: route.InitialStop.City,
                             CompanyName: route.CompanyName,
-                            TicketPrice: route.TicketPrice + ' $'
+                            TicketPrice: route.TicketPrice + ' ' + self.state.currency
                         });
                     });
                 }
@@ -65,18 +66,21 @@ class Arrivals extends React.Component {
         });
     }
 
-    handleFiltersSubmit = (filters) => {
-        this.loadArrivals(filters);
+    handleFiltersSubmit = (filters, currency) => {
+        this.setState({ filters: filters });
+        this.setState({ currency: currency });
+        this.loadArrivals(filters, currency);
     }
 
     componentDidMount = () => {
-        this.loadArrivals([]);
+        this.loadArrivals(this.state.filters, this.state.currency);
         //setInterval(this.loadArrivals, this.props.pollInterval);
     }
 
     render() {
         return (
             <div>
+                <h2>Arrivals</h2>
                 <FilterFormArrivals onFilterSubmit={this.handleFiltersSubmit}/>
                 <ReactDataGrid
                     columns={this.columns}

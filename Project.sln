@@ -16,8 +16,16 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Models", "Models\Models.csproj", "{43C42797-F94C-43F8-AA7A-6057D8061B79}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataLayer", "DataLayer\DataLayer.csproj", "{3EE6CBBF-6D2D-416E-AE23-D5FF3EC37AC5}"
+	ProjectSection(ProjectDependencies) = postProject
+		{1A0FFED4-1AF7-41F8-B556-9240702C31A3} = {1A0FFED4-1AF7-41F8-B556-9240702C31A3}
+	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ManagementService", "ManagementService\ManagementService.csproj", "{45358A54-7997-4332-987C-9DDAB3FF5775}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RoutesService", "ManagementService\RoutesService.csproj", "{45358A54-7997-4332-987C-9DDAB3FF5775}"
+	ProjectSection(ProjectDependencies) = postProject
+		{1A0FFED4-1AF7-41F8-B556-9240702C31A3} = {1A0FFED4-1AF7-41F8-B556-9240702C31A3}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utility", "Utility\Utility.csproj", "{1A0FFED4-1AF7-41F8-B556-9240702C31A3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +53,10 @@ Global
 		{45358A54-7997-4332-987C-9DDAB3FF5775}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{45358A54-7997-4332-987C-9DDAB3FF5775}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{45358A54-7997-4332-987C-9DDAB3FF5775}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A0FFED4-1AF7-41F8-B556-9240702C31A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A0FFED4-1AF7-41F8-B556-9240702C31A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A0FFED4-1AF7-41F8-B556-9240702C31A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A0FFED4-1AF7-41F8-B556-9240702C31A3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

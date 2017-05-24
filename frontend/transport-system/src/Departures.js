@@ -9,7 +9,11 @@ class Departures extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = { data: [] };
+        this.state = { 
+            data: [], 
+            filters : [],
+            currency: 'USD'
+        };
     }
 
     static propTypes = {
@@ -31,11 +35,11 @@ class Departures extends React.Component {
         name: 'Ticket Price' 
     }]
 
-    loadArrivals(filters) {
-
+    loadArrivals(filters, currency) {
+        var self = this;
         $.ajax({
             url: this.props.url,
-            data: 'filters=' + JSON.stringify(this.props.initialFilters.concat(filters)),
+            data: 'filters=' + JSON.stringify(this.props.initialFilters.concat(filters)) + '&currency=' + currency,
             dataType: 'json',
             cache: false,
             success: function (data) {
@@ -47,7 +51,7 @@ class Departures extends React.Component {
                             DepartsAt: (new Date(route.InitialStop.DepartureDate)).toLocaleString(),
                             TravelsTo: route.FinalStop.City,
                             CompanyName: route.CompanyName,
-                            TicketPrice: route.TicketPrice + ' $'
+                            TicketPrice: route.TicketPrice + ' ' + self.state.currency
                         });
                     });
                 }
@@ -60,18 +64,21 @@ class Departures extends React.Component {
         });
     }
 
-    handleFiltersSubmit = (filters) => {
-        this.loadArrivals(filters);
+    handleFiltersSubmit = (filters, currency) => {
+        this.setState({ filters: filters });
+        this.setState({ currency: currency });
+        this.loadArrivals(filters, currency);
     }
 
     componentDidMount = () => {
-        this.loadArrivals([]);
+        this.loadArrivals(this.state.filters, this.state.currency);
         //setInterval(this.loadArrivals, this.props.pollInterval);
     }
 
     render() {
         return (
             <div>
+                <h2>Departures</h2>
                 <FilterFormDepartures onFilterSubmit={this.handleFiltersSubmit}/>
                 <ReactDataGrid
                     columns={this.columns}

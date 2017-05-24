@@ -29,7 +29,7 @@ class Login extends React.Component {
                     <input
                         id="Username"
                         type="text"
-                        value={this.state.ArrivesAt}
+                        value="admin@admin.com"
                         onChange={this.handleArrivesAtChange}
                     />
                     
@@ -37,7 +37,7 @@ class Login extends React.Component {
                     <input
                         id="Password"
                         type="password"
-                        value={this.state.ArrivesFrom}
+                        value="1234"
                         onChange={this.handleArrivesFromChange}
                     />
                     <input className="button" type="submit" value="Login" />
