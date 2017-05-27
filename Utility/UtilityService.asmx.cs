@@ -23,12 +23,12 @@ namespace Utility {
         [WebMethod]
         public double ConvertCurrency(double amount, string fromCurrency, string toCurrency) {
 
-            double rate = ExecuteSoap(fromCurrency, toCurrency);
+            double rate = GetRateSoap(fromCurrency, toCurrency);
 
             return amount * rate;
         }
 
-        public double ExecuteSoap(string fromCurrency, string toCurrency) {
+        private double GetRateSoap(string fromCurrency, string toCurrency) {
 
             HttpWebRequest request = CreateWebRequest(@"http://www.webservicex.net/CurrencyConvertor.asmx");
             XmlDocument soapEnvelopeXml = new XmlDocument();

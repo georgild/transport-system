@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ManagementService.UtilityServices {
+namespace RoutesService.UtilityServices {
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -17,10 +17,10 @@ namespace ManagementService.UtilityServices {
         
         // CODEGEN: Generating message contract since element name fromCurrency from namespace http://localhost/UtilityServices is not marked nillable
         [System.ServiceModel.OperationContractAttribute(Action="http://localhost/UtilityServices/ConvertCurrency", ReplyAction="*")]
-        ManagementService.UtilityServices.ConvertCurrencyResponse ConvertCurrency(ManagementService.UtilityServices.ConvertCurrencyRequest request);
+        RoutesService.UtilityServices.ConvertCurrencyResponse ConvertCurrency(RoutesService.UtilityServices.ConvertCurrencyRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://localhost/UtilityServices/ConvertCurrency", ReplyAction="*")]
-        System.Threading.Tasks.Task<ManagementService.UtilityServices.ConvertCurrencyResponse> ConvertCurrencyAsync(ManagementService.UtilityServices.ConvertCurrencyRequest request);
+        System.Threading.Tasks.Task<RoutesService.UtilityServices.ConvertCurrencyResponse> ConvertCurrencyAsync(RoutesService.UtilityServices.ConvertCurrencyRequest request);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -30,12 +30,12 @@ namespace ManagementService.UtilityServices {
     public partial class ConvertCurrencyRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="ConvertCurrency", Namespace="http://localhost/UtilityServices", Order=0)]
-        public ManagementService.UtilityServices.ConvertCurrencyRequestBody Body;
+        public RoutesService.UtilityServices.ConvertCurrencyRequestBody Body;
         
         public ConvertCurrencyRequest() {
         }
         
-        public ConvertCurrencyRequest(ManagementService.UtilityServices.ConvertCurrencyRequestBody Body) {
+        public ConvertCurrencyRequest(RoutesService.UtilityServices.ConvertCurrencyRequestBody Body) {
             this.Body = Body;
         }
     }
@@ -72,12 +72,12 @@ namespace ManagementService.UtilityServices {
     public partial class ConvertCurrencyResponse {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="ConvertCurrencyResponse", Namespace="http://localhost/UtilityServices", Order=0)]
-        public ManagementService.UtilityServices.ConvertCurrencyResponseBody Body;
+        public RoutesService.UtilityServices.ConvertCurrencyResponseBody Body;
         
         public ConvertCurrencyResponse() {
         }
         
-        public ConvertCurrencyResponse(ManagementService.UtilityServices.ConvertCurrencyResponseBody Body) {
+        public ConvertCurrencyResponse(RoutesService.UtilityServices.ConvertCurrencyResponseBody Body) {
             this.Body = Body;
         }
     }
@@ -100,12 +100,12 @@ namespace ManagementService.UtilityServices {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface UtilityServiceSoapChannel : ManagementService.UtilityServices.UtilityServiceSoap, System.ServiceModel.IClientChannel {
+    public interface UtilityServiceSoapChannel : RoutesService.UtilityServices.UtilityServiceSoap, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class UtilityServiceSoapClient : System.ServiceModel.ClientBase<ManagementService.UtilityServices.UtilityServiceSoap>, ManagementService.UtilityServices.UtilityServiceSoap {
+    public partial class UtilityServiceSoapClient : System.ServiceModel.ClientBase<RoutesService.UtilityServices.UtilityServiceSoap>, RoutesService.UtilityServices.UtilityServiceSoap {
         
         public UtilityServiceSoapClient() {
         }
@@ -127,32 +127,32 @@ namespace ManagementService.UtilityServices {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        ManagementService.UtilityServices.ConvertCurrencyResponse ManagementService.UtilityServices.UtilityServiceSoap.ConvertCurrency(ManagementService.UtilityServices.ConvertCurrencyRequest request) {
+        RoutesService.UtilityServices.ConvertCurrencyResponse RoutesService.UtilityServices.UtilityServiceSoap.ConvertCurrency(RoutesService.UtilityServices.ConvertCurrencyRequest request) {
             return base.Channel.ConvertCurrency(request);
         }
         
         public double ConvertCurrency(double amount, string fromCurrency, string toCurrency) {
-            ManagementService.UtilityServices.ConvertCurrencyRequest inValue = new ManagementService.UtilityServices.ConvertCurrencyRequest();
-            inValue.Body = new ManagementService.UtilityServices.ConvertCurrencyRequestBody();
+            RoutesService.UtilityServices.ConvertCurrencyRequest inValue = new RoutesService.UtilityServices.ConvertCurrencyRequest();
+            inValue.Body = new RoutesService.UtilityServices.ConvertCurrencyRequestBody();
             inValue.Body.amount = amount;
             inValue.Body.fromCurrency = fromCurrency;
             inValue.Body.toCurrency = toCurrency;
-            ManagementService.UtilityServices.ConvertCurrencyResponse retVal = ((ManagementService.UtilityServices.UtilityServiceSoap)(this)).ConvertCurrency(inValue);
+            RoutesService.UtilityServices.ConvertCurrencyResponse retVal = ((RoutesService.UtilityServices.UtilityServiceSoap)(this)).ConvertCurrency(inValue);
             return retVal.Body.ConvertCurrencyResult;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<ManagementService.UtilityServices.ConvertCurrencyResponse> ManagementService.UtilityServices.UtilityServiceSoap.ConvertCurrencyAsync(ManagementService.UtilityServices.ConvertCurrencyRequest request) {
+        System.Threading.Tasks.Task<RoutesService.UtilityServices.ConvertCurrencyResponse> RoutesService.UtilityServices.UtilityServiceSoap.ConvertCurrencyAsync(RoutesService.UtilityServices.ConvertCurrencyRequest request) {
             return base.Channel.ConvertCurrencyAsync(request);
         }
         
-        public System.Threading.Tasks.Task<ManagementService.UtilityServices.ConvertCurrencyResponse> ConvertCurrencyAsync(double amount, string fromCurrency, string toCurrency) {
-            ManagementService.UtilityServices.ConvertCurrencyRequest inValue = new ManagementService.UtilityServices.ConvertCurrencyRequest();
-            inValue.Body = new ManagementService.UtilityServices.ConvertCurrencyRequestBody();
+        public System.Threading.Tasks.Task<RoutesService.UtilityServices.ConvertCurrencyResponse> ConvertCurrencyAsync(double amount, string fromCurrency, string toCurrency) {
+            RoutesService.UtilityServices.ConvertCurrencyRequest inValue = new RoutesService.UtilityServices.ConvertCurrencyRequest();
+            inValue.Body = new RoutesService.UtilityServices.ConvertCurrencyRequestBody();
             inValue.Body.amount = amount;
             inValue.Body.fromCurrency = fromCurrency;
             inValue.Body.toCurrency = toCurrency;
-            return ((ManagementService.UtilityServices.UtilityServiceSoap)(this)).ConvertCurrencyAsync(inValue);
+            return ((RoutesService.UtilityServices.UtilityServiceSoap)(this)).ConvertCurrencyAsync(inValue);
         }
     }
 }

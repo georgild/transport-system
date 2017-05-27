@@ -7,16 +7,16 @@ using System.Linq;
 using System.Web;
 using System.Web.Http;
 
-namespace ManagementService.Controllers {
+namespace RoutesService.Controllers {
 
     [AuthFilter]
     [RoutePrefix("api/v1/companies")]
     public class CompaniesController : ApiController {
 
-        private static BusCompanyRepository _repository;
+        private static CompanyRepository _repository;
 
         public CompaniesController() {
-            _repository = new BusCompanyRepository();
+            _repository = new CompanyRepository();
         }
 
         [Route("")]

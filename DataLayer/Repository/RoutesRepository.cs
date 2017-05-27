@@ -9,18 +9,18 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace DataLayer.Repository {
-    public class BusRoutesRepository {
+    public class RoutesRepository {
 
         private static MongoSession _session;
 
-        public Expression<Func<BusRoute, bool>> ParseFilters (List<RequestFilter> filters) {
+        public Expression<Func<Route, bool>> ParseFilters (List<RequestFilter> filters) {
 
             if (filters.Count() <= 0) {
                 throw new ArgumentNullException();
             }
 
-            Expression<Func<BusRoute, bool>> result = null;
-            Expression<Func<BusRoute, bool>> filter = null;
+            Expression<Func<Route, bool>> result = null;
+            Expression<Func<Route, bool>> filter = null;
 
             foreach (RequestFilter requestFilter in filters) {
 
@@ -61,18 +61,18 @@ namespace DataLayer.Repository {
             return result;
         }
 
-        public BusRoutesRepository() {
+        public RoutesRepository() {
             _session = new MongoSession();
             _session.Connect();
         }
 
         public void Delete(string Id) {
-            _session.Delete<BusRoute>(r => r.Id == Id);
+            _session.Delete<Route>(r => r.Id == Id);
         }
 
-        public List<BusRoute> Find(List<RequestFilter> filters) {
+        public List<Route> Find(List<RequestFilter> filters) {
 
-            Expression<Func<BusRoute, bool>> filter = (r => true);
+            Expression<Func<Route, bool>> filter = (r => true);
 
             if (filters.Count > 0) {
                 filter = ParseFilters(filters);
@@ -81,11 +81,11 @@ namespace DataLayer.Repository {
             return _session.Find(filter);
         }
 
-        public void InsertOne(BusRoute route) {
+        public void InsertOne(Route route) {
             _session.InsertOne(route);
         }
 
-        public void ReplaceOne(string Id, BusRoute route) {
+        public void ReplaceOne(string Id, Route route) {
             _session.ReplaceOne(r => r.Id == Id, route);
         }
     }

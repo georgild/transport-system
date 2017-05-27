@@ -6,7 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Http;
 
-namespace ManagementService {
+namespace RoutesService {
     public class Startup {
 
         public void Configuration(IAppBuilder app) {

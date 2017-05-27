@@ -7,11 +7,11 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace DataLayer.Repository {
-    public class BusCompanyRepository {
+    public class CompanyRepository {
 
         private static MongoSession _session;
 
-        public BusCompanyRepository() {
+        public CompanyRepository() {
             _session = new MongoSession();
             _session.Connect();
         }

@@ -10,9 +10,9 @@ namespace Models {
 
     public class BusStop {
 
-        public int ArrivalDate { get; set; }
+        public Int64 ArrivalDate { get; set; }
 
-        public int DepartureDate { get; set; }
+        public Int64 DepartureDate { get; set; }
 
         public string City { get; set; }
     }
@@ -22,7 +22,7 @@ namespace Models {
         Departures = 1
     }
 
-    public class BusRoute {
+    public class Route {
 
         [BsonIgnoreIfNull]
         [BsonRepresentation(BsonType.ObjectId)]

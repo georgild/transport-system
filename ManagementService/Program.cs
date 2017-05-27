@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace ManagementService {
+namespace RoutesService {
     public class Program {
 
         static void Main() {

@@ -23,7 +23,7 @@ namespace DataLayer.Session {
             _collections = new Dictionary<string, string> {
                 { typeof(User).Name, "users" },
                 { typeof(Company).Name, "companies" },
-                { typeof(BusRoute).Name, "bus_routes" }
+                { typeof(Route).Name, "bus_routes" }
             };
         }
 
