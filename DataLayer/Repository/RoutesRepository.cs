@@ -12,6 +12,8 @@ namespace DataLayer.Repository {
     public class RoutesRepository {
 
         private static MongoSession _session;
+        
+        private static long DAY_MS = 24 * 60 * 60 * 1000;
 
         public Expression<Func<Route, bool>> ParseFilters (List<RequestFilter> filters) {
 
@@ -29,16 +31,19 @@ namespace DataLayer.Repository {
                     case "InitialStop.City":
                         filter = (route => route.InitialStop.City.Contains(requestFilter.Value));
                         break;
-                    case "InitialStop.ArrivalDate":
-                        filter = (route => route.InitialStop.DepartureDate.ToString() == requestFilter.Value);
-                        //filter = (route => route.Type == requestFilter.Value);
+                    case "InitialStop.DepartureDate":
+                        filter = (route =>
+                            route.InitialStop.DepartureDate > (long.Parse(requestFilter.Value) - DAY_MS) &&
+                            route.InitialStop.DepartureDate < (long.Parse(requestFilter.Value) + DAY_MS));
                         break;
                     case "FinalStop.City":
                         filter = (route => route.FinalStop.City.Contains(requestFilter.Value));
                         break;
                     case "FinalStop.ArrivalDate":
-                        filter = (route => route.FinalStop.ArrivalDate.ToString() == requestFilter.Value);
-                        //filter = (route => route.Type == requestFilter.Value);
+
+                        filter = (route =>
+                            route.FinalStop.ArrivalDate > (long.Parse(requestFilter.Value) - DAY_MS) &&
+                            route.FinalStop.ArrivalDate < (long.Parse(requestFilter.Value) + DAY_MS));
                         break;
                     case "CompanyName":
                         filter = (route => route.CompanyName.Contains(requestFilter.Value));
@@ -47,7 +52,7 @@ namespace DataLayer.Repository {
                         filter = (route => route.Type == (RouteType)Enum.Parse(typeof(RouteType), requestFilter.Value));
                         break;
                     case "TicketPrice":
-                        //filter = (route => route.Type == requestFilter.Value);
+                        //filter = (route => route.TicketPrice == requestFilter.Value);
                         break;
                 }
                 if (null == result) {

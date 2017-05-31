@@ -27,24 +27,6 @@ class Main extends React.Component {
                     }
                 </div>
             </div>
-            /*<table>
-                <thead>
-                  <tr>
-                      <th>Arrivals</th>
-                      <th>Departures</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                         <td>
-                            <Arrivals url="http://localhost:9001/api/v1/routes" pollInterval={50000}/>
-                        </td>
-                        <td>
-                            <Departures url="http://localhost:9001/api/v1/routes" pollInterval={50000}/>
-                        </td>
-                  </tr>
-                </tbody>
-            </table>*/
         );
     }
 }

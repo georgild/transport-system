@@ -24,7 +24,7 @@ let FilterFormDepartures = React.createClass({
 
         if (DepartsAt) {
             filters.push({
-                Property: 'InitalStop.DepartureDate',
+                Property: 'InitialStop.DepartureDate',
                 Value: (new Date(DepartsAt)).getTime(), 
                 Operator: 'eq'
             })
@@ -94,6 +94,8 @@ let FilterFormDepartures = React.createClass({
                     <select id="Currency" onChange={this.handleCurrencyChange}>
                       <option value="USD">USD</option>
                       <option value="EUR">EUR</option>
+                      <option value="GBP">GBP</option>
+                      <option value="CZK">CZK</option>
                     </select> 
                     <input className="button" type="submit" /*disabled={!this.state.ArrivesAt && !this.state.ArrivesFrom && !this.state.CompanyName}*/ value="Search" />
                 </form>
