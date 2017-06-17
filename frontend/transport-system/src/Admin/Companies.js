@@ -87,6 +87,7 @@ class Companies extends React.Component {
     render() {
         return (
             <div>
+                <h2>Manage Companies</h2>
                 <Toolbar/>
                 <ReactDataGrid
                     //ref={ node => this.grid = node }

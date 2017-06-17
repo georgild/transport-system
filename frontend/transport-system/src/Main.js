@@ -21,9 +21,9 @@ class Main extends React.Component {
                 <div className="App-data-container">
                     {
                         this.state.componentToShow === 0 ?
-                            <Arrivals url="http://localhost:9001/api/v1/routes" pollInterval={50000} initialFilters={[{Property: 'Type', Value: 0, Operator: 'eq'}]}/>
+                            <Arrivals url="http://localhost/api/v1/routes" pollInterval={50000} initialFilters={[{Property: 'Type', Value: 0, Operator: 'eq'}]}/>
                         :
-                            <Departures url="http://localhost:9001/api/v1/routes" pollInterval={50000} initialFilters={[{Property: 'Type', Value: 1, Operator: 'eq'}]}/>
+                            <Departures url="http://localhost/api/v1/routes" pollInterval={50000} initialFilters={[{Property: 'Type', Value: 1, Operator: 'eq'}]}/>
                     }
                 </div>
             </div>

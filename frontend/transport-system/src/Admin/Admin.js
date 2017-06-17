@@ -9,7 +9,7 @@ class Admin extends React.Component {
     constructor(props) {
         super(props);
         this.state = { 
-            isLoggedIn: true,
+            isLoggedIn: false,
             token: null
         };
     }
@@ -22,7 +22,7 @@ class Admin extends React.Component {
 
     handleLoginSubmit = (username, password) => {
         $.post({
-            url: 'http://localhost:9000/token',
+            url: 'http://localhost/token',
             data: 'username=' + username + '&password=' + password + '&grant_type=password',
             async: true,
             cache: false,

@@ -38,9 +38,9 @@ class AdminPanel extends React.Component {
                 <div className="App-data-container">
                     {
                         this.state.componentToShow === 0 ?
-                            <Companies url="http://localhost:9001/api/v1/companies" pollInterval={50000} initialFilters={[]}/>
+                            <Companies url="http://localhost/api/v1/companies" pollInterval={50000} initialFilters={[]}/>
                         :
-                            <Companies url="http://localhost:9001/api/v1/companies" pollInterval={50000}/>
+                            <Companies url="http://localhost/api/v1/companies" pollInterval={50000}/>
                     }
                 </div>
                 <div>
