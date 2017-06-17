@@ -9,7 +9,8 @@ class Admin extends React.Component {
     constructor(props) {
         super(props);
         this.state = { 
-            isLoggedIn: false
+            isLoggedIn: true,
+            token: null
         };
     }
 
@@ -19,23 +20,20 @@ class Admin extends React.Component {
         pollInterval: PropTypes.number
     }
 
-    handleLoginSubmit = () => {
-        /*$.ajax({
-            url: this.props.url,
-            data: 'filters=' + JSON.stringify(this.props.initialFilters.concat(filters)),
-            dataType: 'json',
+    handleLoginSubmit = (username, password) => {
+        $.post({
+            url: 'http://localhost:9000/token',
+            data: 'username=' + username + '&password=' + password + '&grant_type=password',
             async: true,
             cache: false,
             success: function (data) {
-                var parsedData = [];
-                
-                this.setState({ data: parsedData });
+                this.setState({ token: data['access_token'] });
+                this.setState({isLoggedIn: true});
             }.bind(this),
             error: function (xhr, status, err) {
-                console.error(this.props.url, status, err.toString());
+                console.error("token", status, err.toString());
             }.bind(this)
-        });*/
-        this.setState({isLoggedIn: true});
+        });
     }
 
     render() {

@@ -7,8 +7,8 @@ class Login extends React.Component {
     constructor(props) {
         super(props);
         this.state = { 
-            data: [], 
-            filters : []
+            Username: 'admin@admin.com',
+            Password: '1234'
         };
     }
 
@@ -18,7 +18,19 @@ class Login extends React.Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        this.props.onLoginSubmit();
+
+        var Username = this.state.Username.trim();
+        var Password = this.state.Password.trim();
+
+        this.props.onLoginSubmit(Username, Password);
+    }
+
+    handleUsernameChange = (e) => {
+        this.setState({ Username: e.target.value });
+    }
+
+    handlePasswordChange = (e) => {
+        this.setState({ Password: e.target.value });
     }
 
     render() {
@@ -28,17 +40,19 @@ class Login extends React.Component {
                     <label htmlFor="Username">Username:</label>
                     <input
                         id="Username"
+                        name="username"
                         type="text"
                         value="admin@admin.com"
-                        onChange={this.handleArrivesAtChange}
+                        onChange={this.handleUsernameChange}
                     />
                     
                     <label htmlFor="Password">Password:</label>
                     <input
                         id="Password"
+                        name="password"
                         type="password"
                         value="1234"
-                        onChange={this.handleArrivesFromChange}
+                        onChange={this.handlePasswordChange}
                     />
                     <input className="button" type="submit" value="Login" />
                 </form>

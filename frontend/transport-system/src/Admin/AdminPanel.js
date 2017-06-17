@@ -1,14 +1,19 @@
 import React from 'react';
 import $ from 'jquery';
 import {PropTypes} from 'prop-types';
+import logo from '../logo5.png';
+import '../App.css';
+
+import Companies from './Companies';
+//import Departures from './Departures';
+import NavBar from './NavBar';
 
 class AdminPanel extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = { 
-            data: [], 
-            filters : []
+            componentToShow: 0
         };
     }
 
@@ -18,12 +23,25 @@ class AdminPanel extends React.Component {
         pollInterval: PropTypes.number
     }
 
+    handleBarClick = (componentClicked) => {
+        this.setState({ componentToShow : componentClicked });
+    }
+
     render() {
         return (
             <div className="App">
                 <div className="App-header">
-
-                    <h2>Transport System</h2>
+                    <img src={logo} className="App-logo" alt="logo" />
+                    <h2>Admin Panel</h2>
+                </div>
+                <NavBar onBarClick={this.handleBarClick}/>
+                <div className="App-data-container">
+                    {
+                        this.state.componentToShow === 0 ?
+                            <Companies url="http://localhost:9001/api/v1/companies" pollInterval={50000} initialFilters={[]}/>
+                        :
+                            <Companies url="http://localhost:9001/api/v1/companies" pollInterval={50000}/>
+                    }
                 </div>
                 <div>
                     <form onSubmit={this.handleSubmit}>
