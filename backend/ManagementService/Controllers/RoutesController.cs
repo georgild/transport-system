@@ -25,7 +25,9 @@ namespace RoutesService.Controllers {
         [HttpGet]
         public List<Route> Get(
             [FromUri]string filters = null,
-            [FromUri]string currency = "USD") {
+            [FromUri]string currency = "USD",
+            [FromUri]int? start = null,
+            [FromUri]int? limit = null) {
 
             List<Route> result = new List<Route>();
 
@@ -35,7 +37,7 @@ namespace RoutesService.Controllers {
                     parsedFilters = JsonConvert.DeserializeObject<List<RequestFilter>>(filters);
                 }
 
-                result = _repository.Find(parsedFilters);
+                result = _repository.Find(parsedFilters, start, limit);
 
                 if (currency != "USD") {
                     try {

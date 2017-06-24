@@ -24,6 +24,10 @@ namespace DataLayer.Repository {
             return _session.Find<User>(us => true);
         }
 
+        public User Find(string username, string password) {
+            return _session.FindOne<User>(us => us.UserName == username && us.Password == password);
+        }
+
         public void InsertOne(User user) {
             _session.InsertOne(user);
         }

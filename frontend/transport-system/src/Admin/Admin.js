@@ -32,6 +32,7 @@ class Admin extends React.Component {
             }.bind(this),
             error: function (xhr, status, err) {
                 console.error("token", status, err.toString());
+                alert("Authentication failed!");
             }.bind(this)
         });
     }

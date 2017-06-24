@@ -75,7 +75,7 @@ namespace DataLayer.Repository {
             _session.Delete<Route>(r => r.Id == Id);
         }
 
-        public List<Route> Find(List<RequestFilter> filters) {
+        public List<Route> Find(List<RequestFilter> filters, int? start = null, int? limit = null) {
 
             Expression<Func<Route, bool>> filter = (r => true);
 
@@ -83,7 +83,7 @@ namespace DataLayer.Repository {
                 filter = ParseFilters(filters);
             }
 
-            return _session.Find(filter);
+            return _session.Find(filter, start, limit);
         }
 
         public void InsertOne(Route route) {

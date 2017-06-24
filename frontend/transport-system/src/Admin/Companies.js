@@ -34,7 +34,7 @@ class Companies extends React.Component {
     }]
 
     loadCompanies(filters) {
-        var self = this;
+
         $.ajax({
             url: this.props.url,
             data: 'filters=' + JSON.stringify(this.props.initialFilters.concat(filters)),
@@ -87,7 +87,7 @@ class Companies extends React.Component {
     render() {
         return (
             <div>
-                <h2>Manage Companies</h2>
+                <h2>Companies Administration</h2>
                 <Toolbar/>
                 <ReactDataGrid
                     //ref={ node => this.grid = node }

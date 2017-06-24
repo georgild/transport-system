@@ -1,4 +1,6 @@
-﻿using Microsoft.Owin.Security.OAuth;
+﻿using DataLayer.Repository;
+using Microsoft.Owin.Security.OAuth;
+using Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +10,13 @@ using System.Web;
 
 namespace IdentityService.Providers {
     public class SimpleAuthorizationServerProvider : OAuthAuthorizationServerProvider {
+
+        private static UserRepository _repository;
+
+        public SimpleAuthorizationServerProvider() {
+            _repository = new UserRepository();
+        }
+
         public override async Task ValidateClientAuthentication(OAuthValidateClientAuthenticationContext context) {
             context.Validated();
         }
@@ -16,14 +25,12 @@ namespace IdentityService.Providers {
 
             context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] { "*" });
 
-            //using (AuthRepository _repo = new AuthRepository()) {
-            //    IdentityUser user = await _repo.FindUser(context.UserName, context.Password);
+            User user = _repository.Find(context.UserName, context.Password);
 
-            //    if (user == null) {
-            //        context.SetError("invalid_grant", "The user name or password is incorrect.");
-            //        return;
-            //    }
-            //}
+            if (null == user) {
+                context.SetError("invalid_grant", "The user name or password is incorrect.");
+                return;
+            }
 
             var identity = new ClaimsIdentity(context.Options.AuthenticationType);
             identity.AddClaim(new Claim("sub", context.UserName));

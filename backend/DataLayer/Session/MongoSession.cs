@@ -37,9 +37,14 @@ namespace DataLayer.Session {
             collection.DeleteMany(filter);
         }
 
-        public List<T> Find<T>(Expression<Func<T, bool>> filter) {
+        public List<T> Find<T>(Expression<Func<T, bool>> filter, int? start = null, int? limit = null) {
             var collection = _mainDb.GetCollection<T>(_collections[typeof(T).Name]);
-            return collection.Find(filter).ToList();
+            return collection.Find(filter).Skip(start).Limit(limit).ToList();
+        }
+
+        public T FindOne<T>(Expression<Func<T, bool>> filter) {
+            var collection = _mainDb.GetCollection<T>(_collections[typeof(T).Name]);
+            return collection.Find(filter).Limit(1).FirstOrDefault();
         }
 
         public void InsertOne<T>(T item) {
