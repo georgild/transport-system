@@ -33,7 +33,7 @@ class Admin extends React.Component {
             error: function (xhr, status, err) {
                 console.error("token", status, err.toString());
                 alert("Authentication failed!");
-            }.bind(this)
+            }
         });
     }
 

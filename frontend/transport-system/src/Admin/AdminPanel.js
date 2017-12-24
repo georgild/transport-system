@@ -1,5 +1,4 @@
 import React from 'react';
-import $ from 'jquery';
 import {PropTypes} from 'prop-types';
 import logo from '../logo5.png';
 import '../App.css';

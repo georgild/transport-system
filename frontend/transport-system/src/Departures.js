@@ -4,15 +4,17 @@ import {PropTypes} from 'prop-types';
 
 import ReactDataGrid from 'react-data-grid';
 import FilterFormDepartures from './FilterFormDepartures';
+import TicketDialog from './TicketDialog';
 
 class Departures extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = { 
-            data: [], 
+            data: [{TicketPrice: 122}], // for test
             filters : [],
-            currency: 'USD'
+            currency: 'USD',
+            dialogIsOpen: false
         };
     }
 
@@ -32,8 +34,25 @@ class Departures extends React.Component {
         name: 'Company Name' 
     }, { 
         key: 'TicketPrice', 
-        name: 'Ticket Price' 
+        name: 'Ticket Price'
+    }, { 
+        key: 'Options', 
+        name: '',
+        getRowMetaData: (row) => row,
+        formatter: ({ dependentValues }) => (
+          <span>
+            <button className="button" onClick={() => this.handleBuyClick(dependentValues)}>Buy</button>
+          </span>
+        ),
     }]
+
+    handleBuyClick = (row) => {
+        this.setState({ dialogIsOpen: true });
+    }
+
+    handleModalCloseClick = () => {
+        this.setState({dialogIsOpen: false});
+      }
 
     loadArrivals(filters, currency) {
         var self = this;
@@ -86,8 +105,8 @@ class Departures extends React.Component {
                     rowsCount={this.state.data.length}
                     minHeight={500}
                 />
+                <TicketDialog dialogIsOpen={this.state.dialogIsOpen} onCloseClick={this.handleModalCloseClick}/>
             </div>
-
         );
     }
 }
