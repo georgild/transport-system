@@ -4,7 +4,7 @@ import {PropTypes} from 'prop-types';
 
 import ReactDataGrid from 'react-data-grid';
 import FilterFormDepartures from './FilterFormDepartures';
-import TicketDialog from './TicketDialog';
+import OrderDialog from './Orders/OrderDialog';
 
 class Departures extends React.Component {
 
@@ -14,7 +14,8 @@ class Departures extends React.Component {
             data: [{TicketPrice: 122}], // for test
             filters : [],
             currency: 'USD',
-            dialogIsOpen: false
+            dialogIsOpen: false,
+            selectedRowId: ''
         };
     }
 
@@ -41,7 +42,7 @@ class Departures extends React.Component {
         getRowMetaData: (row) => row,
         formatter: ({ dependentValues }) => (
           <span>
-            <button className="button" onClick={() => this.handleBuyClick(dependentValues)}>Buy</button>
+            <button className="button" onClick={() => this.handleBuyClick(dependentValues)}>Order</button>
           </span>
         ),
     }]
@@ -105,7 +106,14 @@ class Departures extends React.Component {
                     rowsCount={this.state.data.length}
                     minHeight={500}
                 />
-                <TicketDialog dialogIsOpen={this.state.dialogIsOpen} onCloseClick={this.handleModalCloseClick}/>
+                <OrderDialog 
+                    routeID={this.state.selectedRowId}
+                    dialogIsOpen={this.state.dialogIsOpen} 
+                    onCloseClick={this.handleModalCloseClick}
+                    rowsCount={10}
+                    colsCount={4}
+                    reservedSeats={[{row: 0, col: 1}]}
+                />
             </div>
         );
     }

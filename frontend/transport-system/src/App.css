@@ -42,9 +42,22 @@
   padding: 10px;
   border-radius: 4px;
 }
-/*table {
-  width: 70%;
-}*/
+table, table td {
+  border: 1px solid;
+}
+
+.ticket-table td {
+  width: 15px; 
+  height: 15px;
+}
+
+.ticket-table td.selected {
+  background-color: green; 
+}
+
+.ticket-table td.reserved {
+  background-color: red; 
+}
 
 form.filterForm {
   margin: 10px;
