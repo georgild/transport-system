@@ -2,7 +2,6 @@ import React from 'react';
 import $ from 'jquery';
 import {PropTypes} from 'prop-types';
 
-import ReactDataGrid from 'react-data-grid';
 import FilterFormDepartures from './FilterFormDepartures';
 import OrderDialog from './Orders/OrderDialog';
 
@@ -11,7 +10,7 @@ class Departures extends React.Component {
     constructor(props) {
         super(props);
         this.state = { 
-            data: [{TicketPrice: 122}], // for test
+            data: [], // for test
             filters : [],
             currency: 'USD',
             dialogIsOpen: false,
@@ -24,36 +23,38 @@ class Departures extends React.Component {
         pollInterval: PropTypes.number
     }
 
-    columns = [{ 
-        key: 'DepartsAt', 
-        name: 'Departs At' 
-    }, { 
-        key: 'TravelsTo', 
-        name: 'Travels To' 
-    }, { 
-        key: 'CompanyName', 
-        name: 'Company Name' 
-    }, { 
-        key: 'TicketPrice', 
-        name: 'Ticket Price'
-    }, { 
-        key: 'Options', 
-        name: '',
-        getRowMetaData: (row) => row,
-        formatter: ({ dependentValues }) => (
-          <span>
-            <button className="button" onClick={() => this.handleBuyClick(dependentValues)}>Order</button>
-          </span>
-        ),
-    }]
+    handleBuyClick = (Id) => {
 
-    handleBuyClick = (row) => {
         this.setState({ dialogIsOpen: true });
+        this.setState({ selectedRowId: Id });
     }
 
     handleModalCloseClick = () => {
         this.setState({dialogIsOpen: false});
-      }
+    }
+
+    handleOrderSubmit = (email, seats) => {
+        this.setState({dialogIsOpen: false});
+
+        var postData = {
+            RouteID: this.state.selectedRowId,
+            User: email,
+            Seats: seats
+        }
+        $.ajax({
+            type: 'POST',
+            url: '/api/v1/orders',
+            data: JSON.stringify(postData),
+            dataType: 'json',
+            cache: false,
+            success: function (data) {
+                alert('Success');
+            },
+            error: function (xhr, status, err) {
+                console.error(this.props.url, status, err.toString());
+            }.bind(this)
+          });
+    }
 
     loadArrivals(filters, currency) {
         var self = this;
@@ -66,8 +67,9 @@ class Departures extends React.Component {
                 var parsedData = [];
 
                 if (data) {
-                    data.forEach(function(route) {
+                    data.forEach(function(route, index) {
                         parsedData.push({
+                            Id: route.Id,
                             DepartsAt: (new Date(route.InitialStop.DepartureDate)).toLocaleString(),
                             TravelsTo: route.FinalStop.City,
                             CompanyName: route.CompanyName,
@@ -100,19 +102,37 @@ class Departures extends React.Component {
             <div>
                 <h2>Departures</h2>
                 <FilterFormDepartures onFilterSubmit={this.handleFiltersSubmit}/>
-                <ReactDataGrid
-                    columns={this.columns}
-                    rowGetter={rowNumber => this.state.data[rowNumber]}
-                    rowsCount={this.state.data.length}
-                    minHeight={500}
-                />
+                <table className="routes-table">
+                    <tbody>
+                    <tr>
+                        <th>Departs At</th>
+                        <th>Travels To</th>
+                        <th>Company Name</th>
+                        <th>Ticket Price</th>
+                        <th></th>
+                    </tr>
+                        {Array.apply(null, this.state.data).map(function(item, i){                                        
+                            return (
+                                <tr key={i} >
+                                    <td>{item.DepartsAt}</td>
+                                    <td>{item.TravelsTo}</td>
+                                    <td>{item.CompanyName}</td>
+                                    <td>{item.TicketPrice}</td>
+                                    <td>
+                                        <button className="button grid-button" onClick={() => this.handleBuyClick(item.Id)}>Order</button>
+                                    </td>
+                                </tr>
+                            );
+                        }, this)} 
+                    </tbody>
+                </table> 
                 <OrderDialog 
-                    routeID={this.state.selectedRowId}
+                    selectedRowId={this.state.selectedRowId}
                     dialogIsOpen={this.state.dialogIsOpen} 
                     onCloseClick={this.handleModalCloseClick}
+                    onSubmitOrder={this.handleOrderSubmit}
                     rowsCount={10}
                     colsCount={4}
-                    reservedSeats={[{row: 0, col: 1}]}
                 />
             </div>
         );

@@ -2,6 +2,7 @@
 import React from 'react';
 import Modal from 'react-modal';
 import {PropTypes} from 'prop-types';
+import $ from 'jquery';
 
 const customStyles = {
     content : {
@@ -25,10 +26,9 @@ class OrderDialog extends React.Component {
     }
 
     static propTypes = {
+        selectedRowId: PropTypes.string,
         dialogIsOpen: PropTypes.bool,
         onCloseClick: PropTypes.func,
-        routeID: PropTypes.string,
-        reservedSeats: PropTypes.array,
         rowsCount: PropTypes.number,
         colsCount: PropTypes.number
 
@@ -39,8 +39,67 @@ class OrderDialog extends React.Component {
         this.props.onCloseClick();
     }
 
+    onSubmitOrder = (e) => {
+        e.preventDefault();
+
+        var email = this.state.email.trim(),
+            selectedSeats = [],
+            self = this;
+
+        this.state.seatClassMap.forEach(function(row, i){ 
+
+            row.forEach(function(cell, j){ 
+                if (self.state.seatClassMap[i][j] === 'selected') {
+                    selectedSeats.push({
+                        Row: i,
+                        Col: j
+                    });
+                }
+            });
+        });
+        this.props.onSubmitOrder(email, selectedSeats);
+    }
+
     onAfterOpen = () => {
+        this.clearPreviousState();
         this.loadReservedSeats();
+    }
+
+    loadReservedSeats() {
+        $.ajax({
+            url: '/api/v1/orders/routes/' + this.props.selectedRowId + '/reservedseats',
+            data: '',
+            dataType: 'json',
+            cache: false,
+            success: function (data) {
+                if (data) {
+                    var seatClassMap = this.state.seatClassMap;
+                    data.forEach(function(item, i){   
+                        seatClassMap[item.Row][item.Col] = 'reserved';
+                    });
+                    this.setState({ seatClassMap: seatClassMap })
+                }
+            }.bind(this),
+            error: function (xhr, status, err) {
+                console.error(this.props.url, status, err.toString());
+            }.bind(this)
+        });
+    }
+
+    clearPreviousState = () => {
+        var seatClassMap = [];
+
+        for (var i =0; i < this.props.rowsCount; i++) {
+
+            seatClassMap[i] = [];
+            //this.setState({ seatClassMap: arrayvar })
+
+            for (var j=0; j < this.props.colsCount; j++) {
+                seatClassMap[i][j] = '';
+            }
+        }
+
+        this.setState({ seatClassMap: seatClassMap })
     }
 
     handleSeatClick = (e) => {
@@ -66,52 +125,8 @@ class OrderDialog extends React.Component {
         this.setState({ email: e.target.value });
     }
 
-    loadReservedSeats() {
-        /*var self = this;
-        $.ajax({
-            url: this.props.url + '/seats',
-            data: 'routeID=' + this.props.routeID,
-            dataType: 'json',
-            cache: false,
-            success: function (data) {
-                var parsedData = [];
-
-                if (data) {
-                    data.forEach(function(route) {
-                        parsedData.push({
-                            DepartsAt: (new Date(route.InitialStop.DepartureDate)).toLocaleString(),
-                            TravelsTo: route.FinalStop.City,
-                            CompanyName: route.CompanyName,
-                            TicketPrice: route.TicketPrice + ' ' + self.state.currency
-                        });
-                    });
-                }
-                
-                this.setState({ data: parsedData });
-            }.bind(this),
-            error: function (xhr, status, err) {
-                console.error(this.props.url, status, err.toString());
-            }.bind(this)
-        });*/
-    }
-
     componentWillMount = () => {
-
-        var seatClassMap = [];
-
-        for (var i =0; i < this.props.rowsCount; i++) {
-
-            seatClassMap[i] = [];
-            //this.setState({ seatClassMap: arrayvar })
-
-            for (var j=0; j < this.props.colsCount; j++) {
-                seatClassMap[i][j] = '';
-            }
-        }
-        this.props.reservedSeats.forEach(function(item, i){   
-            seatClassMap[item.row][item.col] = 'reserved';
-        });
-        this.setState({ seatClassMap: seatClassMap })
+        this.clearPreviousState();
     }
 
     render() {
@@ -131,7 +146,7 @@ class OrderDialog extends React.Component {
                     <label htmlFor="E-Mail">E-Mail:</label>
                     <input
                         id="E-Mail"
-                        type="text"
+                        type="email"
                         value={this.state.email}
                         onChange={this.handleEmailChange}
                     />
@@ -159,7 +174,7 @@ class OrderDialog extends React.Component {
                         }, this)} 
                     </tbody>
                 </table> 
-                <input className="button" type="submit" value="Order" />
+                <input className="button" onClick={this.onSubmitOrder} type="submit" value="Order" />
                 <button className="button" onClick={this.closeModal}>close</button>
             </Modal>
         );
