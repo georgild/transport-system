@@ -40,13 +40,13 @@ var routes = Routes{
 	Route{
 		"PostOrder",
 		"POST",
-		"/api/v1/routes/{routeID}/orders",
+		"/api/v1/orders",
 		PostOrder,
 	},
 	Route{
 		"GetSeats",
 		"GET",
-		"/api/v1/routes/{routeID}/orders/seats",
+		"/api/v1/orders/routes/{routeID}/reservedseats",
 		GetSeats,
 	},
 }
