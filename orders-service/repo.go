@@ -34,6 +34,10 @@ func CreateOrder(order Order) (bson.ObjectId, error) {
 		return "", err
 	}
 
+	if len(order.User) > 0 {
+		SendMail(order.User)
+	}
+
 	return order._id, nil
 }
 
