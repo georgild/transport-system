@@ -21,12 +21,15 @@ class OrderDialog extends React.Component {
         super(props);
         this.state = { 
             email: '',
-            seatClassMap : []
+            seatClassMap : [],
+            selectedSeatsCount: 0
         };
     }
 
     static propTypes = {
         selectedRowId: PropTypes.string,
+        ticketPrice: PropTypes.number,
+        currency: PropTypes.string,
         dialogIsOpen: PropTypes.bool,
         onCloseClick: PropTypes.func,
         rowsCount: PropTypes.number,
@@ -57,6 +60,7 @@ class OrderDialog extends React.Component {
                 }
             });
         });
+        
         this.props.onSubmitOrder(email, selectedSeats);
     }
 
@@ -105,20 +109,24 @@ class OrderDialog extends React.Component {
     handleSeatClick = (e) => {
         e.preventDefault();
 
-        var seatClassMap = this.state.seatClassMap;
+        var seatClassMap = this.state.seatClassMap,
+            selectedSeatsCount = this.state.selectedSeatsCount;
 
         switch (seatClassMap[e.target.parentNode.rowIndex][e.target.cellIndex]) {
             case 'selected': 
                 seatClassMap[e.target.parentNode.rowIndex][e.target.cellIndex] = '';
+                selectedSeatsCount--;
                 break;
             case '': 
                 seatClassMap[e.target.parentNode.rowIndex][e.target.cellIndex] = 'selected';
+                selectedSeatsCount++;
                 break;
             default:
                 break;
         }
         
         this.setState({ seatClassMap: seatClassMap });
+        this.setState({ selectedSeatsCount: selectedSeatsCount })
     }
 
     handleEmailChange = (e) => {
@@ -141,12 +149,13 @@ class OrderDialog extends React.Component {
                     contentLabel="Example Modal"
                     ariaHideApp={false}
                 >
-                <p>Order ticket</p>
+                <h4>Order your ticket</h4>
                 <form onSubmit={this.handleSubmit}>
                     <label htmlFor="E-Mail">E-Mail:</label>
                     <input
                         id="E-Mail"
                         type="email"
+                        placeholder="your@email.com"
                         value={this.state.email}
                         onChange={this.handleEmailChange}
                     />
@@ -155,9 +164,11 @@ class OrderDialog extends React.Component {
                     <input
                         id="Phone"
                         type="text"
+                        placeholder="+359"
                     />
                     <br></br>
                 </form>
+                <h5>Choose your seats:</h5>
                 <table className="ticket-table">
                     <tbody>
                         
@@ -174,6 +185,7 @@ class OrderDialog extends React.Component {
                         }, this)} 
                     </tbody>
                 </table> 
+                <span>Total: {this.state.selectedSeatsCount * this.props.ticketPrice} {this.props.currency}</span>
                 <input className="button" onClick={this.onSubmitOrder} type="submit" value="Order" />
                 <button className="button" onClick={this.closeModal}>close</button>
             </Modal>

@@ -14,7 +14,8 @@ class Departures extends React.Component {
             filters : [],
             currency: 'USD',
             dialogIsOpen: false,
-            selectedRowId: ''
+            selectedRowId: '',
+            selectedTicketPrice: 0
         };
     }
 
@@ -23,10 +24,11 @@ class Departures extends React.Component {
         pollInterval: PropTypes.number
     }
 
-    handleBuyClick = (Id) => {
+    handleBuyClick = (Id, ticketPrice) => {
 
         this.setState({ dialogIsOpen: true });
         this.setState({ selectedRowId: Id });
+        this.setState({ selectedTicketPrice: ticketPrice });
     }
 
     handleModalCloseClick = () => {
@@ -73,7 +75,7 @@ class Departures extends React.Component {
                             DepartsAt: (new Date(route.InitialStop.DepartureDate)).toLocaleString(),
                             TravelsTo: route.FinalStop.City,
                             CompanyName: route.CompanyName,
-                            TicketPrice: route.TicketPrice + ' ' + self.state.currency
+                            TicketPrice: route.TicketPrice
                         });
                     });
                 }
@@ -117,9 +119,11 @@ class Departures extends React.Component {
                                     <td>{item.DepartsAt}</td>
                                     <td>{item.TravelsTo}</td>
                                     <td>{item.CompanyName}</td>
-                                    <td>{item.TicketPrice}</td>
+                                    <td>{item.TicketPrice} {this.state.currency}</td>
                                     <td>
-                                        <button className="button grid-button" onClick={() => this.handleBuyClick(item.Id)}>Order</button>
+                                        <button className="button grid-button" onClick={() => this.handleBuyClick(item.Id, item.TicketPrice)}>
+                                            Order
+                                        </button>
                                     </td>
                                 </tr>
                             );
@@ -128,6 +132,8 @@ class Departures extends React.Component {
                 </table> 
                 <OrderDialog 
                     selectedRowId={this.state.selectedRowId}
+                    ticketPrice={this.state.selectedTicketPrice}
+                    currency={this.state.currency}
                     dialogIsOpen={this.state.dialogIsOpen} 
                     onCloseClick={this.handleModalCloseClick}
                     onSubmitOrder={this.handleOrderSubmit}
